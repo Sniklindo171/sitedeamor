@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rayane & Miguel - Nosso Amor</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Tela de abertura */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            color: #9c27b0;
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 1s ease;
+        }
+        
+        #splash-screen h1 {
+            font-size: 4.5rem;
+            margin: 0 0 30px;
+            text-shadow: 0 0 15px rgba(156, 39, 176, 0.8);
+            animation: pulse 2s infinite;
+            line-height: 1.2;
+        }
+        
+        #enter-button {
+            margin-top: 2rem;
+            padding: 15px 40px;
+            background-color: #9c27b0;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.4s;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+        
+        #enter-button:hover {
+            background-color: #7b1fa2;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        
+        #enter-button:active {
+            transform: translateY(1px);
+        }
+        
+        @keyframes pulse {
+            0% { 
+                transform: scale(1); 
+                text-shadow: 0 0 15px rgba(156, 39, 176, 0.8);
+            }
+            50% { 
+                transform: scale(1.05); 
+                text-shadow: 0 0 25px rgba(156, 39, 176, 1);
+            }
+            100% { 
+                transform: scale(1); 
+                text-shadow: 0 0 15px rgba(156, 39, 176, 0.8);
+            }
+        }
+        
+        .site-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #7b1fa2, #9c27b0);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            font-family: 'Dancing Script', cursive;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Estilos das abas */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 12px 24px;
+            background-color: #9c27b0;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-family: 'Dancing Script', cursive;
+            transition: all 0.3s;
+            margin: 5px;
+            border-radius: 30px;
+            flex: 1;
+            max-width: 300px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .tab-button:hover {
+            background-color: #7b1fa2;
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            background-color: #7b1fa2;
+            font-weight: bold;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Estilo do contador de tempo */
+        .love-timer {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #fff, #f9f0ff);
+            border-radius: 15px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+            max-width: 800px;
+            border: 1px solid #e1bee7;
+        }
+
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .timer-box {
+            padding: 20px 15px;
+            background: linear-gradient(135deg, #7b1fa2, #9c27b0);
+            color: white;
+            border-radius: 12px;
+            min-width: 120px;
+            box-shadow: 0 5px 15px rgba(123, 31, 162, 0.3);
+        }
+
+        .timer-value {
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .timer-label {
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+        
+        .love-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 3rem 0;
+            gap: 25px;
+        }
+        
+        .love-card {
+            width: 320px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+            border: 1px solid #f3e5f5;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .love-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(123, 31, 162, 0.2);
+        }
+        
+        .love-card video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 3px solid #9c27b0;
+            background: #000;
+        }
+        
+        .love-content {
+            padding: 1.8rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .love-content h3 {
+            color: #7b1fa2;
+            margin-top: 0;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .love-content p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: #7b1fa2;
+            border-left: 3px solid #9c27b0;
+            padding: 10px 15px;
+            margin-top: auto;
+            background-color: #f9f0ff;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 3rem 0;
+        }
+        
+        .video-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transition: all 0.4s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: #000;
+        }
+        
+        .video-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(123, 31, 162, 0.3);
+        }
+        
+        .video-item video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+        
+        .video-caption {
+            background: rgba(123, 31, 162, 0.9);
+            color: white;
+            padding: 1.2rem;
+            text-align: center;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+        }
+        
+        .video-item:hover .video-caption {
+            background: rgba(156, 39, 176, 0.95);
+        }
+        
+        .heart-divider {
+            text-align: center;
+            font-size: 3rem;
+            color: #9c27b0;
+            margin: 3rem 0;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.1); }
+            60% { transform: scale(1); }
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 20px;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, #7b1fa2, #9c27b0);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            padding: 15px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: white;
+            border: 4px solid #9c27b0;
+            border-radius: 50%;
+            top: 20px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -17px;
+        }
+        
+        .right::after {
+            left: -17px;
+        }
+        
+        .timeline-content {
+            padding: 25px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e1bee7;
+            transition: all 0.3s;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(123, 31, 162, 0.15);
+        }
+        
+        .timeline-content h3 {
+            color: #7b1fa2;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.7rem;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .timeline-content p {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #7b1fa2, #9c27b0);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .social-links {
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #9c27b0;
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            border: none;
+            font-size: 1.5rem;
+        }
+        
+        /* Modal para vídeo em tela cheia */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-modal-content {
+            width: 90%;
+            max-width: 900px;
+            position: relative;
+        }
+        
+        .modal-video {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            border-radius: 10px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(156, 39, 176, 0.7);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+        
+        .video-btn {
+            background: #9c27b0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+        }
+        
+        .video-btn:hover {
+            background: #7b1fa2;
+        }
+        
+        @media screen and (max-width: 768px) {
+            #splash-screen h1 {
+                font-size: 2.8rem;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+            
+            .timer-box {
+                min-width: 100px;
+                padding: 15px 10px;
+            }
+            
+            .timer-value {
+                font-size: 2.2rem;
+            }
+            
+            .timeline::after {
+                left: 20px;
+            }
+            
+            .heart-divider {
+                font-size: 2.5rem;
+                margin: 2rem 0;
+            }
+            
+            .video-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            #splash-screen h1 {
+                font-size: 2.2rem;
+            }
+            
+            #enter-button {
+                padding: 12px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .love-card {
+                width: 100%;
+                max-width: 350px;
+            }
+            
+            .timer-box {
+                min-width: 80px;
+                padding: 12px 8px;
+            }
+            
+            .timer-value {
+                font-size: 1.8rem;
+            }
+            
+            .timer-label {
+                font-size: 0.9rem;
+            }
+            
+            .video-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela de abertura -->
+    <div id="splash-screen">
+        <h1>Eu Te Amo Meu Amor!</h1>
+        <button id="enter-button">Entrar em Nosso Mundo</button>
+    </div>
+    
+    <!-- Player de música -->
+    <audio id="love-song" loop>
+        <source src="https://audio.jukehost.co.uk/1cKxGQJm8v6r6rYFb0GcNtC2r2fP1G4H" type="audio/mp3">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+    
+    <!-- Botão de controle de áudio -->
+    <button class="audio-control" id="audio-toggle">♪</button>
+    
+    <!-- Modal para vídeo em tela cheia -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <video class="modal-video" id="modalVideo" controls>
+                Seu navegador não suporta o elemento de vídeo.
+            </video>
+        </div>
+    </div>
+    
+    <!-- Conteúdo principal -->
+    <div class="site-content">
+        <header>
+            <h1>Miguel</h1>
+            <div class="subtitle">EU AMO VOCÊ!</div>
+        </header>
+        
+        <div class="container">
+            <!-- Abas -->
+            <div class="tabs">
+                <button class="tab-button active" onclick="openTab('tab1')">Nossos Momentos</button>
+                <button class="tab-button" onclick="openTab('tab2')">Tempo do Nosso Amor</button>
+            </div>
+
+            <!-- Conteúdo da primeira aba -->
+            <div id="tab1" class="tab-content active">
+                <section class="love-section">
+                    <div class="love-card">
+                        <video controls>
+                            <source src="https://drive.google.com/file/d/1Xb0vsP3wv2H8q3dYUJTlPHuuI7Q2vdTs/view" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                        <div class="love-content">
+                            <h3>Primeiro Encontro</h3>
+                            <p>Aquele dia especial quando nossas vidas se cruzaram e tudo começou a fazer sentido.</p>
+                            <div class="quote">26 de Maio, 2021</div>
+                        </div>
+                    </div>
+                    
+                    <div class="love-card">
+                        <video controls>
+                            <source src="https://download1474.mediafire.com/ylvhgthw6leg_oQuZzqy88ser4TfsDPTVj3VYw42-90IJjCK6WRInsODo_8j7R9MfkVfx6SWh8YJxUuQsPPo5vvKn2KXbgcwFExgPmqI-yBj1r0q6VI1lnJwmz1J7ygkNBIi5BI0hZk_TF9mHibtR9k_4ZK5ONdyoG3l2cC7TkqtGw/27nwo80gz9k0th5/video2.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                        <div class="love-content">
+                            <h3>Eu Te Amo meu menino!</h3>
+                            <p>Eu Amo Voce!</p>
+                            <div class="quote">eu te amo infinitamente</div>
+                        </div>
+                    </div>
+                    
+                    <div class="love-card">
+                        <video controls>
+                            <source src="https://download1526.mediafire.com/uxmgawk29ncghYM-ohadVsBmit1fRp7e-Qrt0_Xg6mihHL_r2qP_gLAPBvc8YdxV3L6XPIV7zkcIeh2BWwVLyvSKPoUw62vGYuxlN97pgBz40-shRvxAv8MfGCe8hqFTMCe2dQDgqQnWCulKIJRn2MHhdPQOXsBcONNriE2KmZWycw/118q0fp4mlnk9wi/video3.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                        <div class="love-content">
+                            <h3>meu amor</h3>
+                            <p>meu princeso!</p>
+                            <div class="quote">Meu anjo</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <div class="heart-divider">❤️</div>
+                
+                <section>
+                    <h2 style="text-align: center; font-family: 'Dancing Script', cursive; color: #9c27b0; font-size: 2.5rem;">Nossa Coleção de Momentos</h2>
+                    <div class="video-gallery">
+                        <div class="video-item">
+                            <video>
+                                <source src="https://download1501.mediafire.com/cptosk6667qg8jh93x2o0N6FBUDnhEVElcoWf9gjNYxa0kblkP1Ke2IkpPUnXpdI2MEjUpnAe6UVBwiInUfo1zBZwUNF1rAxXXml-MukAOYm54EdKMDLNe_fxZHp8KRHsFOJTLoJFed1thZ7VWczEa3TR7tucIdk3PDkhmdyP8T5Rw/9osyaas0idm5633/video4.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-caption">O Dia perfeito.</div>
+                        </div>
+                        <div class="video-item">
+                            <video>
+                                <source src="https://download1640.mediafire.com/tmelg7wbj7kgN0cuKOLqgByOeT_tmM9rcGDx4le21DXECZiiLkOatm25n-6HkcfwK3OK5gJ2q15DEzGRnZA25LUVyR5hEDZL8xxyksalPJ5_YhCP-L_eX0cTvfTEi5T4Ch3YZ0IUktxk1y_1WcjfubYYLSkqffX7okCRP-Gj3AzwNg/t4agdigelkknkre/video5.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-caption">O Meu Esposo!</div>
+                        </div>
+                        <div class="video-item">
+                            <video>
+                                <source src="https://download1582.mediafire.com/71yhtadunnsgO3cVamgxjABSpiW1bessJoRFucjnxENFJZun1WGyYf0BCYSv_Pc2G9RYgjHVUnOFqE7wHFhWaYf3Q__UmUdZzJX0IFNZV0APxFISPi0hlGOg28Tc1RfR8KnusWVEGE82F-ATXXeNNiz7zL-X71mtxwzFv1QfnbeqLA/upkfwymgfdvs6mz/video6.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-caption">meu lindo!</div>
+                        </div>
+                        <div class="video-item">
+                            <video>
+                                <source src="https://download1324.mediafire.com/yi43sixbw6kgju2g2qHz04Xi9clC3dYXcVffMTTff5I0tT6qMt4ZM969_FUsBWQZLyp_SjSZbr9GkPuDNWNONozxmwL4ZcBAv2aBBjdcvl1cLWCNDDAg5LDahZMhnzqKsjdBe9ijDGkaK4tRvmWjIYuH24JQoNqSZvYdLwDyuGPNzA/494ov11hcvyry3f/video7.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-caption">Eu te Amo!</div>
+                        </div>
+                        <div class="video-item">
+                            <video>
+                                <source src="https://download943.mediafire.com/cythnja6gfsgC0DnMEqCpRrIRD-UABR2FKWTOkcsg2PE4Vs3vn4XVqMEUACbIfrfUdA6ZEJ48MWENCbvgCn73Gan7RyKXzlgd0i9lpe2o2ES8-tDVbBpdbRY_Sn_z-UPZq_iW6s2BegKFCHWQgR7Gc_fOKFGAKdvqttdFWm-JjO2VA/ok9r0qjpq9ei714/video8.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-caption">meu Amor.</div>
+                        </div>
+                        <div class="video-item">
+                            <video>
+                                <source src="https://download1325.mediafire.com/onnb6r0qy3fgwwYvY93ZZUpm9yfmkrAxL9XCWNarhW-hiEzQ6MLqRhQK0B6WszsB3ZqRUHx60ojvIroysfIScak6HbFSfCymP2m-0O6J7gM7kXCJTb_gVnKzIUd4cZVADip19XxAioarmW6ViQCDh9Amk3UNDfdv-Ug3hHOGqlVevQ/io2k9zhhsjf58gh/video9.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-caption">Meu Bateirista.</div>
+                        </div>
+                        <div class="video-item">
+                            <video>
+                                <source src="https://download1527.mediafire.com/tt802p3umfhgc6M1Drb2TQCBY12ObPmgcpyo0d0y2BGJonU-TtMXxl8vxSuG_TwMYeIsqEmEQHAXV82kc1MszrX4yDdH2sJh8wT2uFxRkXDYcbaNHVgtLfWkZdfvoT3gB7qsEP7SOlk7qzzhgjhsFW9nllgV-AT96MPjUvN24zLloA/blccbvj3pymlbqg/video10.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-caption">Meu Lindo, perfeito.</div>
+                        </div>
+                        <div class="video-item">
+                            <video>
+                                <source src="https://download1582.mediafire.com/0gx4avxhrcrgy7OyamTb1H2iUhk5j6-eGDO4aDYJwhc2L4fyL8uKO1cmHyU0waHYKDcDhkhfdzWoSc5Up_yKDCDGCvQKDkFrLbF-vrrPQ6rnQLPunFHqV1Ow53mpfdn3q4_RkiqhK1CFhrXgjZs7uTWiv-jy3p3JPNbUoySvwi4IWQ/wgote72scy5qe8c/video11.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-caption">Ja Disse que te amo?</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Conteúdo da segunda aba -->
+            <div id="tab2" class="tab-content">
+                <div class="love-timer">
+                    <h2 style="font-family: 'Dancing Script', cursive; color: #9c27b0; font-size: 2.5rem;">Nosso Tempo Juntos</h2>
+                    <p>Desde o dia que nos conhecemos até agora, cada segundo foi especial!</p>
+                    
+                    <div class="timer-container" id="love-counter">
+                        <div class="timer-box">
+                            <div class="timer-value" id="years">0</div>
+                            <div class="timer-label">Anos</div>
+                        </div>
+                        <div class="timer-box">
+                            <div class="timer-value" id="days">0</div>
+                            <div class="timer-label">Dias</div>
+                        </div>
+                        <div class="timer-box">
+                            <div class="timer-value" id="hours">0</div>
+                            <div class="timer-label">Horas</div>
+                        </div>
+                        <div class="timer-box">
+                            <div class="timer-value" id="minutes">0</div>
+                            <div class="timer-label">Minutos</div>
+                        </div>
+                        <div class="timer-box">
+                            <div class="timer-value" id="seconds">0</div>
+                            <div class="timer-label">Segundos</div>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-top: 20px; font-style: italic; color: #7b1fa2;">Desde <span id="start-date">26 de Maio de 2021</span></p>
+                </div>
+                
+                <div class="heart-divider">❤️</div>
+                
+                <section>
+                    <h2 style="text-align: center; font-family: 'Dancing Script', cursive; color: #9c27b0; font-size: 2.5rem;">Mais Momentos Especiais</h2>
+                    <div class="video-gallery">
+                        <div class="video-item">
+                            <video>
+                                <source src="https://download1638.mediafire.com/wondimlfpkhgWy4QV79u38s0HByG9aReHMlQ6jrahTNKQNFqL-mMRlKkNzJCbZ6FU1wgD1KqoE7MJf4Sd83Y4UwkqMa8yHgeFRBQPPZ922gKr7EhXaRMyhjYYRtEtJ5c86a4JzvXJxYq0UoSrW1y_5v3EWENp4PPzLAXV_HoS090IA/o8ugcbj9quyzzjj/video12.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-caption">nois dois juntos e ninguem separa!</div>
+                        </div>
+                        <div class="video-item">
+                            <video>
+                                <source src="https://download851.mediafire.com/hie0luat0bmgC1Nlq3uU9XBAE762MBzxPatzUX70cGMMInlKREsJEvASVav_GPBcveWnMGYQKVFqByHMrPwr8_lHk59giR4QjFa6IHwr-NhiIPqQ5eDogm-B3aiNSvgW9z6MxoVo3PUUjI0nIoAif4QRw5L0mvaopPWB1EdzVO8lDw/en2lp02fo9iqb60/video13.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-caption">nois dois juntos</div>
+                        </div>
+                        <div class="video-item">
+                            <video>
+                                <source src="https://download856.mediafire.com/t9jajiag8nwgY2hZLjL7UtqDi2despaqmOhqLSRxzHO3A0dH1UJJrisdzfzS6YdE5xyhtbs4PhThXYF9kCWMv0Ty2L46GCdv3A2XJqtnlYLvtiEoOIEMwxZ7v07__EtQJEU4ghJBTdDSBgY57B8A_INFJ_yyRUxFcKF3BGk0a1PSrw/pyr9k9xbnnpiw1q/video14.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-caption">eu te amo infinitamente</div>
+                        </div>
+                        <div class="video-item">
+                            <video>
+                                <source src="https://download1507.mediafire.com/kmj6uoxlsowg4LEbdG9uptNfBep2L3aaWjqnRiw89YFxLYC0IfQck4BzCOwNaI7kHcxCLubXehRYP59_ucoQjUtJZ8PvocXBk3S8sHv2DKxCN1McSCaUi2vQTtj8bS1l5l9SWqsNwn_ZJP9SPCwpGKuyd_b71ab2DDji5zyMtHdrGQ/5grtnsmfekn7m4w/video15.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-caption">Nosso Amor é incondicional!</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <div class="heart-divider">❤️</div>
+                
+                <section class="timeline">
+                    <h2 style="text-align: center; font-family: 'Dancing Script', cursive; color: #9c27b0; font-size: 2.5rem;">Nossa Linha do Tempo</h2>
+                    
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Primeiro Encontro</h3>
+                            <p>O dia em que nossos olhares se cruzaram e nossos corações bateram mais forte.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Primeiro Beijo</h3>
+                            <p>O momento mágico que selou nosso destino de ficarmos juntos.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Meu Esposo!</h3>
+                            <p>meu Amor</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <footer>
+            <h3 style="font-family: 'Dancing Script', cursive; margin-bottom: 1.5rem; font-size: 2.2rem;">Programado Por : Augusto Rei Delas</h3>
+            <div class="social-links">
+                <a href="#">@_rayaneoliveiiira_</a>
+                
+                <a href="#">@_rayaneoliveiiira_</a>
+
+                <a href="#">@_rayaneoliveiiira_</a>
+            </div>
+            <p style="margin-top: 1.5rem;">© 2025 Augusto - Todos os direitos reservados</p>
+            <p>Miguel - Meu amor</p>
+        </footer>
+    </div>
+
+    <script>
+        // Tela de abertura
+        document.addEventListener('DOMContentLoaded', function() {
+            const splashScreen = document.getElementById('splash-screen');
+            const siteContent = document.querySelector('.site-content');
+            const enterButton = document.getElementById('enter-button');
+            const audio = document.getElementById('love-song');
+            const audioToggle = document.getElementById('audio-toggle');
+            const videoModal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            const closeModal = document.getElementById('closeModal');
+            let audioPlaying = false;
+            
+            // Função para iniciar o site
+            function startSite() {
+                splashScreen.style.opacity = '0';
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                    siteContent.style.display = 'block';
+                    setTimeout(() => {
+                        siteContent.style.opacity = '1';
+                    }, 100);
+                    
+                    // Tentar iniciar a música
+                    const playPromise = audio.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.log("Reprodução automática bloqueada:", error);
+                        });
+                    }
+                }, 1000);
+            }
+            
+            // Evento do botão Entrar
+            enterButton.addEventListener('click', startSite);
+            
+            // Controle de áudio
+            audioToggle.addEventListener('click', function() {
+                if (audioPlaying) {
+                    audio.pause();
+                    audioToggle.textContent = '♪';
+                } else {
+                    audio.play();
+                    audioToggle.textContent = '🔊';
+                }
+                audioPlaying = !audioPlaying;
+            });
+            
+            // Função para alternar entre abas
+            window.openTab = function(tabId) {
+                // Esconde todos os conteúdos de abas
+                const tabContents = document.getElementsByClassName('tab-content');
+                for (let i = 0; i < tabContents.length; i++) {
+                    tabContents[i].classList.remove('active');
+                }
+                
+                // Remove a classe 'active' de todos os botões
+                const tabButtons = document.getElementsByClassName('tab-button');
+                for (let i = 0; i < tabButtons.length; i++) {
+                    tabButtons[i].classList.remove('active');
+                }
+                
+                // Mostra a aba selecionada e marca o botão como ativo
+                document.getElementById(tabId).classList.add('active');
+                event.currentTarget.classList.add('active');
+            }
+
+            // Contador de tempo do relacionamento
+            function updateLoveTime() {
+                // Data de início do relacionamento (26 de Maio de 2021)
+                const startDate = new Date(2021, 4, 26);
+                
+                const now = new Date();
+                const diff = now - startDate;
+                
+                // Calcula os valores
+                const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24) % 365);
+                const hours = Math.floor(diff / (1000 * 60 * 60) % 24);
+                const minutes = Math.floor(diff / (1000 * 60) % 60);
+                const seconds = Math.floor(diff / 1000 % 60);
+                
+                // Atualiza os elementos HTML
+                document.getElementById('years').textContent = years;
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+                
+                // Atualiza a data de início formatada
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('start-date').textContent = startDate.toLocaleDateString('pt-BR', options);
+            }
+
+            // Atualiza o contador imediatamente e depois a cada segundo
+            updateLoveTime();
+            setInterval(updateLoveTime, 1000);
+            
+            // Sistema de vídeos
+            const galleryVideos = document.querySelectorAll('.video-item video');
+            
+            galleryVideos.forEach(video => {
+                video.addEventListener('click', function() {
+                    const videoSource = this.querySelector('source').src;
+                    modalVideo.src = videoSource;
+                    modalVideo.load();
+                    videoModal.style.display = 'flex';
+                    modalVideo.play();
+                });
+            });
+            
+            // Fechar modal
+            closeModal.addEventListener('click', function() {
+                videoModal.style.display = 'none';
+                modalVideo.pause();
+            });
+            
+            // Fechar modal ao clicar fora do vídeo
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === videoModal) {
+                    videoModal.style.display = 'none';
+                    modalVideo.pause();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
